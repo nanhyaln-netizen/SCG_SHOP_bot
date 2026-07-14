@@ -71,9 +71,20 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/help - Help"
  
      )
-    
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
+    user = update.effective_user
+
+    # Custome စာ Admin ဆီပို့
+    await context.bot.send_message(
+        chat_id=ADMIN_CHAT_ID,
+        text=(
+            "📩 New Customer Message\n\n"
+            f"👤 Name: {user.first_name}\n"
+            f"🆔 ID: {user.id}\n"
+            f"💬 Message: {text}"
+        )
+    )
 
     if "order" in text.lower() or "ဝယ်" in text:
         await update.message.reply_text(
@@ -85,6 +96,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "SCG SHOP မှ ကြိုဆိုပါတယ် 💎\n"
             "UC / Diamond ဝယ်ယူလိုပါက ဆက်သွယ်ပါ။"
         )
+
+
     
 
 

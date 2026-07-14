@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 TOKEN = os.getenv("BOT_TOKEN")
-
+ADMIN_ID = 8758621220
 PAYMENT = """
 💳 Payment
 
@@ -26,10 +26,9 @@ Order တင်ရန် ပို့ပေးပါ—
 🌐 Server:
 📦 Package:
 💳 Payment Screenshot:
-""")
-
 async def reply_order(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.message.from_user
+    order_text = update.message.text
 
     await update.message.reply_text(
         "✅ Order လက်ခံရရှိပါပြီ\n"
@@ -37,8 +36,16 @@ async def reply_order(update: Update, context: ContextTypes.DEFAULT_TYPE):
         + PAYMENT
     )
 
-    # Admin username နေရာကို နောက်မှ User ID ပြောင်းရမယ်
-
+    await context.bot.send_message(
+        chat_id=ADMIN_ID,
+        text=(
+            "🛒 New Order\n\n"
+            f"👤 User: @{user.username}\n"
+            f"🆔 User ID: {user.id}\n\n"
+            f"📩 Order:\n{order_text}"
+        )
+    )
+    
 def main():
     app = Application.builder().token(TOKEN).build()
 

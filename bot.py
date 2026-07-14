@@ -3,6 +3,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 TOKEN = os.getenv("BOT_TOKEN")
+
 PAYMENT = """
 💳 Payment
 
@@ -25,25 +26,15 @@ Order တင်ရန် ပို့ပေးပါ—
 🌐 Server:
 📦 Package:
 💳 Payment Screenshot:
+""")
+
 async def reply_order(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.message.from_user
-    order_text = update.message.text
-
     await update.message.reply_text(
         "✅ Order လက်ခံရရှိပါပြီ\n"
         "စစ်ဆေးပြီး အမြန်ဆုံး ပြန်လည်ဆောင်ရွက်ပေးပါမယ်။\n\n"
         + PAYMENT
     )
 
-    async def reply_order(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "✅ Order လက်ခံရရှိပါပြီ\n"
-        "စစ်ဆေးပြီး အမြန်ဆုံး ပြန်လည်ဆောင်ရွက်ပေးပါမယ်။\n\n"
-        + PAYMENT
-    )
-        )
-    )
-    
 def main():
     app = Application.builder().token(TOKEN).build()
 

@@ -85,21 +85,24 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "SCG SHOP မှ ကြိုဆိုပါတယ် 💎\n"
             "UC / Diamond ဝယ်ယူလိုပါက ဆက်သွယ်ပါ။"
         )
+    
 
 
 def main():
-    app = Application.builder().token(TOKEN).build()
+    app =Application.builder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("payment", payment))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("pubg", pubg))
+
     app.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
     )
 
     print("Bot is running...")
     app.run_polling()
+
 
 if __name__ == "__main__":
     main()

@@ -30,7 +30,24 @@ Wave Pay : 09984759970
 
 # User ID တွေကို သိမ်းထားမယ့် Dictionary
 USER_MAP ={}
+PUBG_PRICE = """
+🔥 PUBG UC Price List 🤗
 
+💸 60 UC = 5000 Ks
+💸 120 UC = 10000 Ks
+💸 180 UC = 15000 Ks
+💸 240 UC = 19800 Ks
+💸 325 UC = 23500 Ks
+💸 385 UC = 29400 Ks
+💸 660 UC = 44800 Ks
+💸 720 UC = 50000 Ks
+💸 1320 UC = 85000 Ks
+💸 1800 UC = 113000 Ks
+💸 3850 UC = 212500 Ks
+💸 8100 UC = 413000 Ks
+"""
+async def pubg(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(PUBG_PRICE)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     USER_MAP[user_id] = True
@@ -76,7 +93,7 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("payment", payment))
     app.add_handler(CommandHandler("help", help_command))
-
+    app.add_handler(CommandHandler("pubg", pubg))
     app.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
     )
@@ -84,6 +101,3 @@ def main():
     print("Bot is running...")
     app.run_polling()
 
-
-if __name__ == "__main__":
-    main()
